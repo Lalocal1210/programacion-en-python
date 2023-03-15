@@ -1,10 +1,13 @@
 import tkinter as tk
+from tkinter import messagebox
+from tkinter import messagebox
+
 import random
 
 class MatriculaGenerator(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.master = master
+    def __init__(self, ventana=None):
+        super().__init__(ventana)
+        self.ventana = ventana
         self.pack()
         self.create_widgets()
 
@@ -34,10 +37,10 @@ class MatriculaGenerator(tk.Frame):
         self.ano_nacimiento_entry.pack()
 
         #Año actual
-        self.añoa_label = tk.Label(self,text="Año actual",fg="pink")
+        self.añoa_label = tk.Label(self, text="Año actual:",fg="purple")
         self.añoa_label.pack()
         self.añoa_entry = tk.Entry(self)
-        self.añoa_entry.pack
+        self.añoa_entry.pack()
 
         # Carrera
         self.carrera_label = tk.Label(self, text="Carrera:",fg="blue")
@@ -65,12 +68,12 @@ class MatriculaGenerator(tk.Frame):
         digitos_aleatorios = ''.join([str(random.randint(0, 9)) for i in range(3)])
 
         # Generar la matrícula
-        matricula = f"{añoa}{ano_nacimiento[-2:]}{nombre[0]}{ap_paterno[0]}{ap_materno[0]}{digitos_aleatorios}{carrera[:3]}"
+        matricula = f"{añoa[-2:]}{ano_nacimiento[-2:]}{nombre[0]}{ap_paterno[0]}{ap_materno[0]}{digitos_aleatorios}{carrera[:3].upper()}"
 
         # Mostrar la matrícula en un MessageBox
         tk.messagebox.showinfo("Matrícula Generada", matricula,fg="black")
 
 root = tk.Tk()
-app = MatriculaGenerator(master=root)
+app = MatriculaGenerator(ventana=root)
 app.mainloop()
 
